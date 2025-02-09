@@ -1,0 +1,77 @@
+version: "0.0.1"
+
+metadata:
+  name: "interactive-story-generator"
+  description: "This flow helps writers create detailed and engaging stories with iterative and cumulative feedback for interactive storytelling and continuation."
+  author: "krish"
+  tags: [fiction, storytelling, iterative, feedback, narrative, continuation]
+  private: false
+
+inputs:
+  story_overview:
+    type: string
+    description: "Overview of the story's premise or setting."
+    required: true
+    example: "A post-apocalyptic world where magic and technology coexist."
+  genre:
+    type: string
+    description: "Genre of the story (e.g., Fantasy, Sci-Fi)."
+    required: true
+    example: "Fantasy"
+  themes:
+    type: string
+    description: "Themes to explore in the story."
+    required: true
+    example: "Rebellion, survival"
+  magic_or_tech_rules:
+    type: string
+    description: "Rules or restrictions for magic or technology in the story."
+    required: false
+    example: "Magic is powered by emotions; technology is ancient and hard to repair."
+  major_characters:
+    type: integer
+    description: "Number of major characters in the story."
+    required: true
+    example: 5
+  character_traits:
+    type: string
+    description: "Key character traits or archetypes for the main characters."
+    required: false
+    example: "Heroic leader, cunning rogue, wise mentor"
+  feedback:
+    type: string
+    description: "Cumulative or new feedback used to refine the story or guide its continuation."
+    required: false
+    example: "Add more political conflict for the next segment."
+  story:
+    type: string
+    description: "The current state of the generated story. When empty, an initial story is created. When non-empty, the new output should append a continuation to the existing narrative."
+    required: false
+    example: "In a world where magic and technology intertwine..."
+
+model:
+  provider: "anthropic"
+  name: "claude-3.5-sonnet"
+
+prompt: |
+  Generate a detailed and engaging story or continue an existing narrative based on the following inputs:
+
+  Story Overview/Setting/Premise: {story_overview}
+  Genre: {genre}
+  Themes to Explore in the Story: {themes}
+  Magic/Tech Rules (if applicable): {magic_or_tech_rules}
+  Number of Major Characters in the Story: {major_characters}
+  Key Character Traits or Archetypes (if provided): {character_traits}
+  Feedback/New Guidance for Refinement or Continuation (if any): {feedback}
+  Existing Story (if provided): {story}
+
+  If the "Existing Story" is empty, create a new story that incorporates all the provided elements.
+  If the "Existing Story" is not empty, treat it as established content and generate a continuation that naturally follows from where it left off. Do not alter or repeat any part of the existing narrative.
+
+  Ensure that every input element is clearly and fully expressed in a cohesive narrative.
+
+readme: |
+  This flow supports interactive storytelling.
+  In the initial phase, it generates a complete story based on your inputs and iterative feedback.
+  Once the initial story is created, users can choose to either conclude it or continue it.
+  In continuation mode, the established narrative is preserved exactly, and any new content is appended as a new segment.
