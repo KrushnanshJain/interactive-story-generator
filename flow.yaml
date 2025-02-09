@@ -3,7 +3,7 @@ version: "0.0.1"
 metadata:
   name: "interactive-story-generator"
   description: "This flow helps writers create detailed and engaging stories with iterative and cumulative feedback for interactive storytelling and continuation."
-  author: "your-username"
+  author: "krish"
   tags: [fiction, storytelling, iterative, feedback, narrative, continuation]
   private: false
 
